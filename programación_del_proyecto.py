@@ -15,7 +15,7 @@ MORSE_DICT = {
     '.-.-.': '+', '-....-': '-'
 }
 
-# Configuración del puerto serie - Cambiar según el puerto asignado al Arduino
+# Configuración del puerto serie 
 PUERTO = 'COM3' 
 
 try:
@@ -106,7 +106,7 @@ class JuegoMorse:
         
         if conectado:
             arduino.write("CLEAR\n".encode())
-            # Comando D_ modo:palabra (Ejemplo: D_A:HOLA)
+            # Comando D_ modo:palabra
             arduino.write(f"D_{self.modo_dictado.get()}:{self.objetivo}\n".encode())
             
         self.prog_pc = ""
@@ -160,7 +160,7 @@ class JuegoMorse:
                 if len(self.prog_ard) == len(self.objetivo): 
                     self.root.after(1000, self.finalizar_ronda)
 
-        # Procesamiento de la letra escrita por el PC tras un tiempo de silencio (2.5s)
+        # Procesamiento de la letra escrita por el PC tras un tiempo de silencio 
         if self.turno == "PC" and self.activo and self.morse_actual != "" and (time.time() - self.t_suelto > 2.5):
             letra_p = MORSE_DICT.get(self.morse_actual, "?")
             
